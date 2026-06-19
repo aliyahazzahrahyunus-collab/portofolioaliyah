@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aliyah Az Zahrah Yunus | Portofolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Menggunakan font Poppins untuk kesan yang lebih soft dan menarik -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        // Palet warna Pink Soft
+                        primary: '#f472b6', // Pink-400
+                        secondary: '#db2777', // Pink-600
+                        lightPink: '#fdf2f8', // Pink-50
+                        dark: '#1e1b4b', // Deep Indigo (cocok dipadukan dengan pink di dark mode)
+                        darkCard: '#312e81',
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Custom Scrollbar bernuansa Pink */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fdf2f8;
+            .dark & { background: #1e1b4b; }
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #fbcfe8;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f472b6;
+        }
+
+        /* Animasi Fade-in */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Typing Effect Caret */
+        .typing-caret {
+            border-right: 0.15em solid #f472b6;
+            animation: blink-caret .75s step-end infinite;
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #f472b6; }
+        }
+
+        /* Glassmorphism khusus pink */
+        .glass-pink {
+            background: rgba(253, 242, 248, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .dark .glass-pink {
+            background: rgba(30, 27, 75, 0.7);
+            border: 1px solid rgba(244, 114, 182, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-lightPink text-slate-800 dark:bg-dark dark:text-slate-200 transition-colors duration-300 font-sans antialiased overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300 glass-pink" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo/Name -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-rose-400 font-sans tracking-wide">
+                        Aliyah.
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#beranda" class="text-sm font-medium hover:text-primary transition-colors">Beranda</a>
+                    <a href="#tentang" class="text-sm font-medium hover:text-primary transition-colors">Profil</a>
+                    <a href="#pendidikan" class="text-sm font-medium hover:text-primary transition-colors">Pendidikan & Pengalaman</a>
+                    <a href="#proyek" class="text-sm font-medium hover:text-primary transition-colors">Proyek</a>
+                    <a href="#keahlian" class="text-sm font-medium hover:text-primary transition-colors">Keahlian</a>
+                    <a href="#kontak" class="text-sm font-medium hover:text-primary transition-colors">Kontak</a>
+                    
+                    <!-- Dark Mode Toggle -->
+                    <button id="theme-toggle" class="p-2.5 rounded-full bg-white dark:bg-darkCard shadow-sm hover:shadow-md text-primary transition-all focus:outline-none" aria-label="Toggle Dark Mode">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block text-yellow-300"></i>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center space-x-4">
+                    <button id="theme-toggle-mobile" class="p-2 rounded-full text-primary focus:outline-none" aria-label="Toggle Dark Mode Mobile">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block text-yellow-300"></i>
+                    </button>
+                    <button id="mobile-menu-btn" class="text-slate-600 dark:text-slate-300 hover:text-primary focus:outline-none p-2">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 dark:bg-darkCard/95 backdrop-blur-md border-t border-pink-100 dark:border-slate-800">
+            <div class="px-4 pt-2 pb-6 space-y-2 shadow-xl">
+                <a href="#beranda" class="block px-3 py-3 rounded-xl text-base font-medium hover:bg-pink-50 dark:hover:bg-dark hover:text-primary mobile-link transition-colors">Beranda</a>
+                <a href="#tentang" class="block px-3 py-3 rounded-xl text-base font-medium hover:bg-pink-50 dark:hover:bg-dark hover:text-primary mobile-link transition-colors">Profil</a>
+                <a href="#pendidikan" class="block px-3 py-3 rounded-xl text-base font-medium hover:bg-pink-50 dark:hover:bg-dark hover:text-primary mobile-link transition-colors">Pendidikan & Pengalaman</a>
+                <a href="#proyek" class="block px-3 py-3 rounded-xl text-base font-medium hover:bg-pink-50 dark:hover:bg-dark hover:text-primary mobile-link transition-colors">Proyek</a>
+                <a href="#keahlian" class="block px-3 py-3 rounded-xl text-base font-medium hover:bg-pink-50 dark:hover:bg-dark hover:text-primary mobile-link transition-colors">Keahlian</a>
+                <a href="#kontak" class="block px-3 py-3 rounded-xl text-base font-medium hover:bg-pink-50 dark:hover:bg-dark hover:text-primary mobile-link transition-colors">Kontak</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
+        <!-- Background decorative blobs (Soft Pink/Rose) -->
+        <div class="absolute top-20 left-10 w-72 h-72 bg-pink-300/40 dark:bg-pink-600/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
+        <div class="absolute top-40 right-20 w-72 h-72 bg-rose-300/40 dark:bg-rose-600/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-8 left-1/3 w-72 h-72 bg-fuchsia-300/40 dark:bg-fuchsia-600/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="flex flex-col-reverse md:flex-row items-center justify-between gap-12 lg:gap-20">
+                
+                <!-- Text Content -->
+                <div class="w-full md:w-3/5 text-center md:text-left fade-in">
+                    <div class="inline-block px-4 py-1.5 rounded-full bg-pink-100 dark:bg-pink-900/30 text-primary font-medium text-sm mb-6 border border-pink-200 dark:border-pink-800/50">
+                        Mahasiswa TIK PNUP 👋
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-4 leading-tight">
+                        <span class="block text-slate-800 dark:text-white">Halo, Saya</span>
+                        <span class="block bg-clip-text text-transparent bg-gradient-to-r from-primary to-rose-400 mt-2">Aliyah Az Zahrah</span>
+                    </h1>
+                    <div class="text-xl sm:text-2xl text-slate-600 dark:text-slate-300 font-medium mb-6 h-10">
+                        Seorang <span id="typing-text" class="text-primary font-semibold typing-caret"></span>
+                    </div>
+                    <p class="text-base sm:text-lg text-slate-500 dark:text-slate-400 mb-8 max-w-xl mx-auto md:mx-0 leading-relaxed">
+                        Mahasiswa Teknik Informatika dan Komputer dengan fokus pada Jaringan Komputer. Memiliki ketertarikan kuat dalam eksplorasi teknologi, administrasi jaringan, serta industri kreatif seperti penulisan naskah.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                        <a href="#kontak" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-primary to-rose-400 text-white font-medium hover:shadow-lg hover:shadow-pink-300/50 dark:hover:shadow-pink-900/50 transition-all transform hover:-translate-y-1 text-center border-none">
+                            Hubungi Saya
+                        </a>
+                        <a href="#proyek" class="px-8 py-3.5 rounded-full bg-white dark:bg-transparent border-2 border-pink-200 dark:border-slate-700 font-medium text-slate-700 dark:text-slate-300 hover:border-primary dark:hover:border-primary hover:text-primary transition-all text-center">
+                            Lihat Portofolio
+                        </a>
+                    </div>
+                    
+                    <!-- Social Links -->
+                    <div class="mt-10 flex justify-center md:justify-start space-x-5">
+                        <a href="https://linkedin.com/in/aliyahazzahrah" target="_blank" class="w-12 h-12 rounded-full bg-white dark:bg-darkCard shadow-sm flex items-center justify-center text-slate-500 hover:text-primary hover:shadow-md transition-all text-xl" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="mailto:aliyahazzahrahyunus@gmail.com" class="w-12 h-12 rounded-full bg-white dark:bg-darkCard shadow-sm flex items-center justify-center text-slate-500 hover:text-primary hover:shadow-md transition-all text-xl" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        <a href="#" class="w-12 h-12 rounded-full bg-white dark:bg-darkCard shadow-sm flex items-center justify-center text-slate-500 hover:text-primary hover:shadow-md transition-all text-xl" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+
+                <!-- Profile Image -->
+                <div class="w-full md:w-2/5 flex justify-center fade-in relative animate-float">
+                    <!-- Ornamen Dekoratif di belakang foto -->
+                    <div class="absolute inset-0 bg-gradient-to-tr from-pink-300 to-rose-200 rounded-full blur-2xl opacity-60 dark:opacity-30"></div>
+                    <div class="relative w-64 h-64 sm:w-80 sm:h-80">
+                        <!-- Lingkaran frame -->
+                        <div class="absolute inset-0 border-2 border-dashed border-primary rounded-full animate-[spin_20s_linear_infinite]"></div>
+                        <div class="absolute inset-3 bg-white dark:bg-darkCard rounded-full overflow-hidden shadow-2xl p-2">
+                            <!-- Anda bisa mengganti URL di bawah dengan link foto asli Anda -->
+                           <img src="aliyah.jpeg"
+     alt="Foto Aliyah Az Zahrah Yunus"
+     class="w-full h-full object-cover rounded-full bg-pink-50">
+                        </div>
+                    </div>
+                    
+                    <!-- Floating Badge -->
+                    <div class="absolute -bottom-4 -left-4 bg-white dark:bg-darkCard px-4 py-2 rounded-2xl shadow-xl flex items-center gap-3 border border-pink-100 dark:border-slate-800">
+                        <span class="text-3xl">💻</span>
+                        <div class="text-left">
+                            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Fokus Bidang</p>
+                            <p class="text-sm font-bold text-slate-800 dark:text-white">Jaringan & Komputer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Down Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block">
+            <a href="#tentang" class="text-pink-300 hover:text-primary transition-colors flex flex-col items-center">
+                <span class="text-xs font-medium tracking-widest uppercase mb-2">Scroll</span>
+                <i class="fas fa-chevron-down text-xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Tentang / About Section -->
+    <section id="tentang" class="py-24 relative bg-white dark:bg-darkCard/30 rounded-[3rem] mx-4 sm:mx-8 lg:mx-12 shadow-sm border border-pink-50 dark:border-slate-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <span class="text-primary font-semibold tracking-wider uppercase text-sm mb-2 block">Profil Ringkas</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Tentang Saya</h2>
+                <div class="w-24 h-1.5 bg-gradient-to-r from-primary to-rose-300 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-12 items-center">
+                <!-- Image/Graphic -->
+                <div class="w-full lg:w-5/12 fade-in">
+                    <div class="relative rounded-[2rem] overflow-hidden shadow-2xl aspect-[4/5] bg-pink-100 dark:bg-slate-800 group">
+                         <img src="https://placehold.co/600x800/fbcfe8/db2777?text=Kegiatan+Kampus" alt="Kegiatan Kampus Aliyah" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                         <!-- Overlay gradient -->
+                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-8">
+                             <div class="text-white">
+                                 <p class="font-bold text-2xl mb-1">PNUP 2023</p>
+                                 <p class="text-pink-200 text-sm flex items-center"><i class="fas fa-map-marker-alt mr-2"></i> Makassar, Sulawesi Selatan</p>
+                             </div>
+                         </div>
+                    </div>
+                </div>
+
+                <!-- Text Content -->
+                <div class="w-full lg:w-7/12 fade-in">
+                    <h3 class="text-2xl font-semibold mb-4 text-slate-800 dark:text-slate-100">Mahasiswa TIK dengan Passion di Bidang Jaringan & Kreatif</h3>
+                    
+                    <div class="prose prose-slate dark:prose-invert max-w-none">
+                        <p class="text-slate-600 dark:text-slate-400 mb-5 leading-relaxed text-lg">
+                            Halo! Saya <strong>Aliyah Az Zahrah Yunus</strong>, Mahasiswa Teknik Informatika dan Komputer (Program Studi Komputer dan Jaringan) di Politeknik Negeri Ujung Pandang (PNUP), angkatan 2023.
+                        </p>
+                        <p class="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
+                            Saya memiliki ketertarikan yang mendalam pada administrasi jaringan, keamanan siber, dan pengembangan sistem. Selain dunia teknis IT, saya juga menikmati proses kreatif dan terbiasa bekerja dalam tim lintas disiplin melalui berbagai proyek kampus, seperti produksi naskah kreatif. Saya selalu antusias untuk belajar hal baru dan mencari solusi dari setiap tantangan.
+                        </p>
+                    </div>
+
+                    <!-- Personal Info Grid -->
+                    <div class="bg-pink-50 dark:bg-dark rounded-2xl p-6 border border-pink-100 dark:border-slate-800 mb-8">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-4">
+                            <div class="flex items-start">
+                                <span class="w-10 h-10 rounded-full bg-white dark:bg-darkCard text-primary flex items-center justify-center mr-4 shadow-sm"><i class="fas fa-id-card"></i></span>
+                                <div>
+                                    <span class="block text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">NIM</span>
+                                    <span class="font-semibold text-slate-900 dark:text-slate-200">42523009</span>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="w-10 h-10 rounded-full bg-white dark:bg-darkCard text-primary flex items-center justify-center mr-4 shadow-sm"><i class="fas fa-university"></i></span>
+                                <div>
+                                    <span class="block text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Program Studi</span>
+                                    <span class="font-semibold text-slate-900 dark:text-slate-200">Teknik Komputer & Jaringan</span>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="w-10 h-10 rounded-full bg-white dark:bg-darkCard text-primary flex items-center justify-center mr-4 shadow-sm"><i class="fas fa-envelope"></i></span>
+                                <div>
+                                    <span class="block text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Email</span>
+                                    <a href="mailto:aliyahazzahrahyunus@gmail.com" class="font-semibold text-primary hover:text-secondary transition-colors text-sm break-all">aliyahazzahrahyunus@gmail.com</a>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="w-10 h-10 rounded-full bg-white dark:bg-darkCard text-primary flex items-center justify-center mr-4 shadow-sm"><i class="fab fa-linkedin"></i></span>
+                                <div>
+                                    <span class="block text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">LinkedIn</span>
+                                    <a href="https://linkedin.com/in/aliyahazzahrah" target="_blank" class="font-semibold text-slate-900 dark:text-slate-200 hover:text-primary transition-colors text-sm">in/aliyahazzahrah</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#" class="inline-flex items-center px-6 py-3 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-medium hover:bg-slate-800 dark:hover:bg-slate-200 transition-all shadow-md group">
+                        <i class="fas fa-download mr-2 group-hover:animate-bounce"></i> Unduh Resume
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pendidikan & Pengalaman -->
+    <section id="pendidikan" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <span class="text-primary font-semibold tracking-wider uppercase text-sm mb-2 block">Perjalanan Saya</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Pendidikan & Pengalaman</h2>
+                <div class="w-24 h-1.5 bg-gradient-to-r from-primary to-rose-300 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Pendidikan Timeline -->
+                <div class="fade-in">
+                    <h3 class="text-2xl font-bold mb-8 text-slate-800 dark:text-white flex items-center">
+                        <i class="fas fa-graduation-cap text-primary mr-3 text-3xl"></i> Pendidikan
+                    </h3>
+                    
+                    <div class="relative border-l-2 border-pink-200 dark:border-pink-900/50 ml-4 lg:ml-6 space-y-10 pb-4">
+                        <!-- Item Pendidikan -->
+                        <div class="relative pl-8">
+                            <div class="absolute -left-[11px] top-1 h-5 w-5 rounded-full bg-white border-4 border-primary shadow-sm"></div>
+                            <div class="bg-white dark:bg-darkCard p-6 rounded-2xl shadow-sm border border-pink-50 dark:border-slate-800 hover:shadow-md transition-shadow">
+                                <span class="text-sm font-semibold text-primary bg-pink-50 dark:bg-dark px-3 py-1 rounded-full mb-3 inline-block">2023 – Sekarang</span>
+                                <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-1">Politeknik Negeri Ujung Pandang (PNUP)</h4>
+                                <p class="text-slate-600 dark:text-slate-300 font-medium mb-3">D4 - Teknik Komputer dan Jaringan</p>
+                                <p class="text-slate-500 dark:text-slate-400 text-sm">Fokus pembelajaran pada infrastruktur jaringan, administrasi server, keamanan siber, dan dasar pemrograman. Aktif dalam berbagai praktikum dan proyek lab.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pengalaman Timeline -->
+                <div class="fade-in">
+                    <h3 class="text-2xl font-bold mb-8 text-slate-800 dark:text-white flex items-center">
+                        <i class="fas fa-briefcase text-primary mr-3 text-3xl"></i> Organisasi / Kepanitiaan
+                    </h3>
+                    
+                    <div class="relative border-l-2 border-pink-200 dark:border-pink-900/50 ml-4 lg:ml-6 space-y-8 pb-4">
+                        <!-- Item Pengalaman (Placeholder, silahkan diedit nanti) -->
+                        <div class="relative pl-8">
+                            <div class="absolute -left-[11px] top-1 h-5 w-5 rounded-full bg-white border-4 border-primary shadow-sm"></div>
+                            <div class="bg-white dark:bg-darkCard p-6 rounded-2xl shadow-sm border border-pink-50 dark:border-slate-800 hover:shadow-md transition-shadow group">
+                                <span class="text-sm font-semibold text-primary bg-pink-50 dark:bg-dark px-3 py-1 rounded-full mb-3 inline-block">2024 – Sekarang</span>
+                                <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-1 group-hover:text-primary transition-colors">Himpunan Mahasiswa TIK (Contoh)</h4>
+                                <p class="text-slate-600 dark:text-slate-300 font-medium mb-3">Anggota Divisi Kominfo</p>
+                                <ul class="text-slate-500 dark:text-slate-400 text-sm list-disc pl-4 space-y-1">
+                                    <li>Mengelola jaringan internal lab saat event kampus sehingga koneksi berjalan stabil.</li>
+                                    <li>Berkontribusi dalam tim dokumentasi dan publikasi kegiatan himpunan.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Item Pengalaman 2 -->
+                        <div class="relative pl-8">
+                            <div class="absolute -left-[11px] top-1 h-5 w-5 rounded-full bg-white border-4 border-slate-300 dark:border-slate-600"></div>
+                            <div class="bg-white dark:bg-darkCard p-6 rounded-2xl shadow-sm border border-pink-50 dark:border-slate-800 hover:shadow-md transition-shadow group">
+                                <span class="text-sm font-semibold text-slate-500 bg-slate-100 dark:bg-dark px-3 py-1 rounded-full mb-3 inline-block">Agt 2023 – Des 2023</span>
+                                <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-1 group-hover:text-primary transition-colors">Kepanitiaan Event IT Kampus</h4>
+                                <p class="text-slate-600 dark:text-slate-300 font-medium mb-3">Staf Perlengkapan & Jaringan</p>
+                                <p class="text-slate-500 dark:text-slate-400 text-sm">Menyiapkan infrastruktur LAN untuk kompetisi E-Sports antar jurusan dan memastikan kelancaran teknis selama acara berlangsung.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects & Prestasi Section -->
+    <section id="proyek" class="py-24 bg-white dark:bg-darkCard/30 rounded-[3rem] mx-4 sm:mx-8 lg:mx-12 shadow-sm border border-pink-50 dark:border-slate-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <span class="text-primary font-semibold tracking-wider uppercase text-sm mb-2 block">Karya Saya</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Proyek & Prestasi</h2>
+                <div class="w-24 h-1.5 bg-gradient-to-r from-primary to-rose-300 mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
+                
+                <!-- Project 1 (Film Pendek) -->
+                <div class="bg-lightPink dark:bg-dark rounded-3xl overflow-hidden shadow-lg border border-pink-100 dark:border-slate-700 group fade-in flex flex-col h-full transform transition duration-500 hover:-translate-y-2">
+                    <div class="relative overflow-hidden h-64 sm:h-72">
+                        <!-- Placeholder Image untuk Film -->
+                        <img src="https://placehold.co/800x500/1e1b4b/f472b6?text=Suara+Yang+Tak+Didengar" alt="Poster Film Pendek" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute top-4 right-4 bg-white/90 dark:bg-dark/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-primary shadow-sm">
+                            Tahun 2026
+                        </div>
+                        <!-- Hover Overlay -->
+                        <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <a href="#" class="w-14 h-14 rounded-full bg-white text-primary flex items-center justify-center hover:scale-110 transition-transform shadow-lg" title="Lihat Cuplikan">
+                                <i class="fas fa-play text-xl ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-3 py-1 bg-pink-100 dark:bg-pink-900/30 text-xs rounded-full text-primary font-medium border border-pink-200 dark:border-pink-800">Kreatif / Film</span>
+                            <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-xs rounded-full text-purple-600 dark:text-purple-300 font-medium border border-purple-200 dark:border-purple-800">Sosial</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2 text-slate-900 dark:text-white group-hover:text-primary transition-colors">Suara Yang Tak Didengar</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 font-medium mb-4"><i class="fas fa-user-edit mr-2"></i>Penulis Naskah & Tim Produksi</p>
+                        
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-6 flex-grow leading-relaxed">
+                            Mengembangkan naskah film pendek berdurasi ±5 menit yang mengangkat isu sosial seputar kekerasan psikologis di lingkungan kampus. Proyek ini mencakup riset tema hingga penyusunan skenario lengkap bersama tim produksi untuk meningkatkan kesadaran mahasiswa.
+                        </p>
+                        
+                        <a href="#" class="inline-flex items-center text-primary font-semibold hover:text-secondary transition-colors mt-auto">
+                            Lihat Detail Proyek <i class="fas fa-arrow-right ml-2 text-sm transform group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 (IT/Jaringan Placeholder) -->
+                <div class="bg-lightPink dark:bg-dark rounded-3xl overflow-hidden shadow-lg border border-pink-100 dark:border-slate-700 group fade-in flex flex-col h-full transform transition duration-500 hover:-translate-y-2">
+                    <div class="relative overflow-hidden h-64 sm:h-72">
+                        <img src="https://placehold.co/800x500/1e293b/fbcfe8?text=Proyek+Jaringan/Server" alt="Proyek Jaringan" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute top-4 right-4 bg-white/90 dark:bg-dark/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-slate-700 dark:text-slate-300 shadow-sm">
+                            Tahun 2025
+                        </div>
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-xs rounded-full text-blue-600 dark:text-blue-300 font-medium border border-blue-200 dark:border-blue-800">Infrastruktur</span>
+                            <span class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-xs rounded-full text-green-600 dark:text-green-300 font-medium border border-green-200 dark:border-green-800">Mikrotik</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2 text-slate-900 dark:text-white group-hover:text-primary transition-colors">Simulasi Jaringan Enterprise (Contoh)</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 font-medium mb-4"><i class="fas fa-network-wired mr-2"></i>Network Engineer (Tugas Akhir/Praktek)</p>
+                        
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-6 flex-grow leading-relaxed">
+                            [Silahkan edit deskripsi ini dengan proyek jaringan/IT Anda]. Merancang dan mengimplementasikan topologi jaringan skala menengah menggunakan perangkat Cisco dan Mikrotik, dilengkapi dengan sistem firewall dasar dan manajemen bandwidth.
+                        </p>
+                        
+                        <a href="#" class="inline-flex items-center text-primary font-semibold hover:text-secondary transition-colors mt-auto">
+                            Lihat Detail Proyek <i class="fas fa-arrow-right ml-2 text-sm transform group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Keahlian / Skills Section -->
+    <section id="keahlian" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <span class="text-primary font-semibold tracking-wider uppercase text-sm mb-2 block">Kompetensi</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Keahlian Saya</h2>
+                <div class="w-24 h-1.5 bg-gradient-to-r from-primary to-rose-300 mx-auto rounded-full"></div>
+                <p class="mt-6 text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">Kombinasi kemampuan teknis IT dan soft skills yang saya kembangkan selama masa perkuliahan dan berorganisasi.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Hard Skills -->
+                <div class="fade-in bg-white dark:bg-darkCard p-8 rounded-3xl shadow-sm border border-pink-50 dark:border-slate-800">
+                    <h3 class="text-2xl font-bold mb-8 flex items-center text-slate-800 dark:text-white">
+                        <i class="fas fa-laptop-code text-primary mr-3"></i> Hard Skills (Teknis)
+                    </h3>
+                    
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                        <!-- Skill Item -->
+                        <div class="flex flex-col items-center justify-center p-4 bg-pink-50/50 dark:bg-dark rounded-2xl border border-transparent hover:border-primary/30 transition-colors group">
+                            <i class="fas fa-network-wired text-3xl text-slate-400 group-hover:text-primary transition-colors mb-2"></i>
+                            <span class="text-sm font-medium text-slate-700 dark:text-slate-300 text-center">Admin Jaringan</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center p-4 bg-pink-50/50 dark:bg-dark rounded-2xl border border-transparent hover:border-blue-400/30 transition-colors group">
+                            <i class="fas fa-router text-3xl text-slate-400 group-hover:text-blue-500 transition-colors mb-2"></i>
+                            <span class="text-sm font-medium text-slate-700 dark:text-slate-300 text-center">Mikrotik / Cisco</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center p-4 bg-pink-50/50 dark:bg-dark rounded-2xl border border-transparent hover:border-yellow-400/30 transition-colors group">
+                            <i class="fab fa-linux text-3xl text-slate-400 group-hover:text-yellow-500 transition-colors mb-2"></i>
+                            <span class="text-sm font-medium text-slate-700 dark:text-slate-300 text-center">Linux Server</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center p-4 bg-pink-50/50 dark:bg-dark rounded-2xl border border-transparent hover:border-blue-300/30 transition-colors group">
+                            <i class="fab fa-python text-3xl text-slate-400 group-hover:text-blue-400 transition-colors mb-2"></i>
+                            <span class="text-sm font-medium text-slate-700 dark:text-slate-300 text-center">Python</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center p-4 bg-pink-50/50 dark:bg-dark rounded-2xl border border-transparent hover:border-orange-400/30 transition-colors group">
+                            <i class="fab fa-java text-3xl text-slate-400 group-hover:text-orange-500 transition-colors mb-2"></i>
+                            <span class="text-sm font-medium text-slate-700 dark:text-slate-300 text-center">Java</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center p-4 bg-pink-50/50 dark:bg-dark rounded-2xl border border-transparent hover:border-red-400/30 transition-colors group">
+                            <i class="fab fa-microsoft text-3xl text-slate-400 group-hover:text-red-500 transition-colors mb-2"></i>
+                            <span class="text-sm font-medium text-slate-700 dark:text-slate-300 text-center">MS Office</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Soft Skills & Language -->
+                <div class="fade-in space-y-8">
+                    <!-- Soft Skills -->
+                    <div class="bg-white dark:bg-darkCard p-8 rounded-3xl shadow-sm border border-pink-50 dark:border-slate-800">
+                        <h3 class="text-2xl font-bold mb-6 flex items-center text-slate-800 dark:text-white">
+                            <i class="fas fa-users text-primary mr-3"></i> Soft Skills
+                        </h3>
+                        
+                        <div class="space-y-5">
+                            <div>
+                                <div class="flex justify-between mb-1.5">
+                                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">Kerja Tim & Kolaborasi</span>
+                                </div>
+                                <div class="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-2.5">
+                                    <div class="bg-gradient-to-r from-pink-400 to-rose-400 h-2.5 rounded-full" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1.5">
+                                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">Komunikasi & Penulisan (Kreatif)</span>
+                                </div>
+                                <div class="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-2.5">
+                                    <div class="bg-gradient-to-r from-pink-400 to-rose-400 h-2.5 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1.5">
+                                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">Pemecahan Masalah (Problem Solving)</span>
+                                </div>
+                                <div class="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-2.5">
+                                    <div class="bg-gradient-to-r from-pink-400 to-rose-400 h-2.5 rounded-full" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1.5">
+                                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">Manajemen Waktu</span>
+                                </div>
+                                <div class="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-2.5">
+                                    <div class="bg-gradient-to-r from-pink-400 to-rose-400 h-2.5 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Languages -->
+                    <div class="bg-white dark:bg-darkCard p-8 rounded-3xl shadow-sm border border-pink-50 dark:border-slate-800">
+                        <h3 class="text-xl font-bold mb-4 flex items-center text-slate-800 dark:text-white">
+                            <i class="fas fa-language text-primary mr-3"></i> Kemampuan Bahasa
+                        </h3>
+                        <div class="flex flex-wrap gap-4">
+                            <span class="px-4 py-2 bg-pink-50 dark:bg-dark text-slate-700 dark:text-slate-300 rounded-xl border border-pink-100 dark:border-slate-700 font-medium">🇮🇩 Indonesia <span class="text-primary text-sm ml-1">(Native)</span></span>
+                            <span class="px-4 py-2 bg-pink-50 dark:bg-dark text-slate-700 dark:text-slate-300 rounded-xl border border-pink-100 dark:border-slate-700 font-medium">🇬🇧 Inggris <span class="text-primary text-sm ml-1">(Menengah / Pasif)</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontak Section -->
+    <section id="kontak" class="py-24 relative bg-white dark:bg-darkCard/30 rounded-[3rem] mx-4 sm:mx-8 lg:mx-12 shadow-sm border border-pink-50 dark:border-slate-800/50 mb-12">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 fade-in">
+                <span class="text-primary font-semibold tracking-wider uppercase text-sm mb-2 block">Sapa Saya</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Mari Terhubung!</h2>
+                <div class="w-24 h-1.5 bg-gradient-to-r from-primary to-rose-300 mx-auto rounded-full mb-6"></div>
+                <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">Tertarik untuk berdiskusi soal proyek IT, penulisan, atau peluang kolaborasi lainnya? Jangan ragu untuk menghubungi saya.</p>
+            </div>
+
+            <div class="bg-pink-50 dark:bg-dark rounded-3xl p-8 md:p-12 shadow-inner border border-pink-100/50 dark:border-slate-800 flex flex-col md:flex-row items-center justify-between gap-10 fade-in">
+                
+                <div class="w-full md:w-1/2 space-y-6">
+                    <a href="mailto:aliyahazzahrahyunus@gmail.com" class="flex items-center p-4 bg-white dark:bg-darkCard rounded-2xl hover:shadow-md transition-shadow group border border-transparent hover:border-pink-200 dark:hover:border-slate-700">
+                        <div class="w-14 h-14 bg-pink-100 dark:bg-pink-900/30 text-primary rounded-full flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fas fa-paper-plane"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm text-slate-500 dark:text-slate-400 font-medium">Kirim Email</p>
+                            <p class="text-lg font-semibold text-slate-800 dark:text-white group-hover:text-primary transition-colors">aliyahazzahrahyunus@gmail.com</p>
+                        </div>
+                    </a>
+                    
+                    <a href="https://linkedin.com/in/aliyahazzahrah" target="_blank" class="flex items-center p-4 bg-white dark:bg-darkCard rounded-2xl hover:shadow-md transition-shadow group border border-transparent hover:border-pink-200 dark:hover:border-slate-700">
+                        <div class="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 text-blue-600 rounded-full flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                            <i class="fab fa-linkedin-in"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm text-slate-500 dark:text-slate-400 font-medium">Koneksi LinkedIn</p>
+                            <p class="text-lg font-semibold text-slate-800 dark:text-white group-hover:text-blue-600 transition-colors">in/aliyahazzahrah</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="w-full md:w-1/2 flex flex-col items-center text-center bg-white dark:bg-darkCard p-8 rounded-3xl border border-pink-100 dark:border-slate-700 shadow-sm relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl"></div>
+                    <div class="absolute -left-10 -bottom-10 w-32 h-32 bg-rose-400/10 rounded-full blur-2xl"></div>
+                    
+                    <i class="fas fa-map-marker-alt text-4xl text-primary mb-4 relative z-10"></i>
+                    <h3 class="text-xl font-bold text-slate-800 dark:text-white mb-2 relative z-10">Lokasi Saat Ini</h3>
+                    <p class="text-slate-600 dark:text-slate-400 mb-6 relative z-10">Makassar, Sulawesi Selatan<br>Indonesia</p>
+                    
+                    <button class="px-6 py-2.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-full text-sm font-semibold hover:bg-primary dark:hover:bg-primary dark:hover:text-white transition-colors z-10 relative">
+                        Terbuka untuk Diskusi
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-transparent py-10 text-center">
+        <div class="max-w-7xl mx-auto px-4">
+            <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">
+                Didesain dengan <i class="fas fa-heart text-primary mx-1 animate-pulse"></i> oleh Aliyah Az Zahrah Yunus &copy; <span id="current-year"></span>
+            </p>
+            <div class="mt-4">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="w-10 h-10 rounded-full bg-white dark:bg-darkCard text-primary shadow-sm hover:shadow-md hover:-translate-y-1 transition-all flex items-center justify-center mx-auto focus:outline-none" aria-label="Back to top">
+                    <i class="fas fa-arrow-up"></i>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set tahun footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // 1. Logika Toggle Dark Mode (Menyesuaikan tema pink)
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleMobileBtn = document.getElementById('theme-toggle-mobile');
+        
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        function toggleTheme() {
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            }
+        }
+
+        themeToggleBtn.addEventListener('click', toggleTheme);
+        themeToggleMobileBtn.addEventListener('click', toggleTheme);
+
+        // 2. Logika Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            if(mobileMenu.classList.contains('hidden')){
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+            });
+        });
+
+        // 3. Efek Navbar Glassmorphism saat Scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-sm');
+                navbar.classList.add('border-b', 'border-pink-100', 'dark:border-slate-800');
+            } else {
+                navbar.classList.remove('shadow-sm', 'border-b', 'border-pink-100', 'dark:border-slate-800');
+            }
+        });
+
+        // 4. Typing Effect Baru
+        const typingTextElement = document.getElementById('typing-text');
+        const phrases = ['Mahasiswa Teknik Informatika.', 'Penggemar Jaringan Komputer.', 'Penulis Naskah Kreatif.', 'Tech Enthusiast.'];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingDelay = 100;
+        let erasingDelay = 50;
+        let newPhraseDelay = 2000;
+
+        function typeEffect() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                typingTextElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+                typingDelay = erasingDelay;
+            } else {
+                typingTextElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+                typingDelay = 100; 
+            }
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                isDeleting = true;
+                typingDelay = newPhraseDelay; 
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typingDelay = 500; 
+            }
+
+            setTimeout(typeEffect, typingDelay);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if(phrases.length) setTimeout(typeEffect, newPhraseDelay);
+        });
+
+        // 5. Scroll Fade-in Animation
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const appearOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+
+        fadeElements.forEach(element => {
+            appearOnScroll.observe(element);
+        });
+    </script>
+</body>
+</html>
